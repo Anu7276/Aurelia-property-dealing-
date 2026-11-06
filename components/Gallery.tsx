@@ -94,7 +94,7 @@ export default function Gallery() {
 
     // DESKTOP: Horizontal pinned scroll scrub
     mm.add("(min-width: 768px)", () => {
-      const getScrollAmount = () => -(track.scrollWidth - window.innerWidth + 120);
+      const getScrollAmount = () => -(track.scrollWidth - window.innerWidth);
 
       gsap.to(track, {
         x: getScrollAmount,
@@ -102,7 +102,7 @@ export default function Gallery() {
         scrollTrigger: {
           trigger: container,
           start: "top top",
-          end: () => `+=${track.scrollWidth - window.innerWidth + 300}`,
+          end: () => `+=${Math.max(1, track.scrollWidth - window.innerWidth)}`,
           pin: pinWrap,
           scrub: 1,
           invalidateOnRefresh: true,
