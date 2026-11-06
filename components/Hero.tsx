@@ -8,12 +8,14 @@ const TOTAL_FRAMES = 72;
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
   const pinSectionRef = useRef<HTMLDivElement>(null);
-  const videoWrapperRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const textRef = useRef<HTMLDivElement>(null);
+
+  // Content layers
+  const step1Ref = useRef<HTMLDivElement>(null);
+  const step2Ref = useRef<HTMLDivElement>(null);
+  const step3Ref = useRef<HTMLDivElement>(null);
   const scrollIndicatorRef = useRef<HTMLDivElement>(null);
   const bottomBadgeRef = useRef<HTMLDivElement>(null);
-  const bgRef = useRef<HTMLDivElement>(null);
 
   const [framesLoaded, setFramesLoaded] = useState(false);
   const imagesRef = useRef<HTMLImageElement[]>([]);
@@ -30,7 +32,6 @@ export default function Hero() {
       img.onload = () => {
         count++;
         if (count >= 10 && !framesLoaded) {
-          // As soon as first few frames are ready, enable canvas render
           setFramesLoaded(true);
         }
       };
@@ -38,7 +39,7 @@ export default function Hero() {
     }
     imagesRef.current = loadedImages;
 
-    // Helper to render frame on canvas with object-fit: cover logic
+    // Helper to render frame on canvas with object-fit: cover math (always full screen)
     const renderFrame = (frameIndex: number) => {
       const canvas = canvasRef.current;
       if (!canvas) return;
@@ -51,7 +52,6 @@ export default function Hero() {
       const dpr = typeof window !== "undefined" ? Math.min(window.devicePixelRatio || 1, 2) : 1;
       const rect = canvas.getBoundingClientRect();
 
-      // Ensure canvas internal resolution matches display size
       if (canvas.width !== Math.floor(rect.width * dpr) || canvas.height !== Math.floor(rect.height * dpr)) {
         canvas.width = Math.floor(rect.width * dpr);
         canvas.height = Math.floor(rect.height * dpr);
@@ -65,7 +65,6 @@ export default function Hero() {
       const iw = img.naturalWidth;
       const ih = img.naturalHeight;
 
-      // Cover math
       const scale = Math.max(cw / iw, ch / ih);
       const nw = iw * scale;
       const nh = ih * scale;
@@ -77,7 +76,7 @@ export default function Hero() {
       ctx.restore();
     };
 
-    // Initial draw when frame 0 is ready
+    // Initial frame draw
     const initialImg = loadedImages[0];
     if (initialImg) {
       if (initialImg.complete) {
@@ -87,26 +86,25 @@ export default function Hero() {
       }
     }
 
-    // Window resize handler to redraw canvas
     const handleResize = () => {
       renderFrame(0);
     };
     window.addEventListener("resize", handleResize);
 
-    // 2. Set up ScrollTrigger timeline to scrub through frames & shrink card
+    // 2. Set up ScrollTrigger timeline (Full-screen pinned scrub with side content scrolling)
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
 
     const container = containerRef.current;
     const pinSection = pinSectionRef.current;
-    const videoWrapper = videoWrapperRef.current;
-    const text = textRef.current;
+    const step1 = step1Ref.current;
+    const step2 = step2Ref.current;
+    const step3 = step3Ref.current;
     const scrollIndicator = scrollIndicatorRef.current;
     const bottomBadge = bottomBadgeRef.current;
-    const bg = bgRef.current;
 
-    if (!container || !pinSection || !videoWrapper || !text || !scrollIndicator || !bg) {
+    if (!container || !pinSection || !step1 || !step2 || !step3) {
       return () => {
         window.removeEventListener("resize", handleResize);
       };
@@ -118,11 +116,10 @@ export default function Hero() {
       };
     }
 
-    const isMobile = window.innerWidth < 768;
-
     const ctx = gsap.context(() => {
       const frameTracker = { frame: 0 };
 
+      // Total timeline pinned over 320vh
       const tlScroll = gsap.timeline({
         scrollTrigger: {
           trigger: container,
@@ -134,14 +131,14 @@ export default function Hero() {
         },
       });
 
-      // Frame scrubbing: scrubs 0 to 71 across the scroll
+      // A) Scrub the 72 frames continuously from start to finish
       tlScroll.to(
         frameTracker,
         {
           frame: TOTAL_FRAMES - 1,
           snap: "frame",
           ease: "none",
-          duration: 0.85,
+          duration: 1.0,
           onUpdate: () => {
             const idx = Math.min(TOTAL_FRAMES - 1, Math.max(0, Math.round(frameTracker.frame)));
             renderFrame(idx);
@@ -150,66 +147,89 @@ export default function Hero() {
         0
       );
 
-      // Text and badges fade up and out during initial 30% of scroll
+      // B) Step 1: Initial Title fades out during 0 to 0.25 of scroll
       tlScroll.to(
-        text,
+        step1,
         {
           opacity: 0,
-          y: -50,
-          duration: 0.3,
+          y: -40,
+          duration: 0.22,
           ease: "power2.inOut",
         },
-        0
+        0.04
       );
 
-      tlScroll.to(
-        scrollIndicator,
-        {
-          opacity: 0,
-          y: -20,
-          duration: 0.2,
-          ease: "power2.inOut",
-        },
-        0
-      );
+      if (scrollIndicator) {
+        tlScroll.to(
+          scrollIndicator,
+          {
+            opacity: 0,
+            y: -20,
+            duration: 0.15,
+            ease: "power2.inOut",
+          },
+          0.02
+        );
+      }
 
       if (bottomBadge) {
         tlScroll.to(
           bottomBadge,
           {
             opacity: 0,
-            duration: 0.2,
+            duration: 0.15,
             ease: "power2.inOut",
           },
-          0
+          0.02
         );
       }
 
-      // Card shrink: shrinks into floating perspective card
-      tlScroll.to(
-        videoWrapper,
+      // C) Step 2: Philosophy side content enters (0.22), holds, then fades out (0.55)
+      tlScroll.fromTo(
+        step2,
+        { opacity: 0, y: 50 },
         {
-          width: isMobile ? "90vw" : "60vw",
-          height: isMobile ? "54vh" : "64vh",
-          borderRadius: "4px",
-          rotateY: isMobile ? 0 : -6,
-          rotateX: isMobile ? 0 : 3,
-          boxShadow: "0 30px 70px -15px rgba(27, 26, 23, 0.3)",
-          duration: 0.75,
-          ease: "power2.inOut",
+          opacity: 1,
+          y: 0,
+          duration: 0.15,
+          ease: "power2.out",
         },
-        0.05
+        0.25
       );
 
-      // Background color shift to cream #F5F1E8
       tlScroll.to(
-        bg,
+        step2,
         {
-          backgroundColor: "#F5F1E8",
-          duration: 0.75,
-          ease: "power2.inOut",
+          opacity: 0,
+          y: -40,
+          duration: 0.14,
+          ease: "power2.in",
         },
-        0.05
+        0.52
+      );
+
+      // D) Step 3: Architecture & Light side content enters (0.58), holds, then fades out (0.90)
+      tlScroll.fromTo(
+        step3,
+        { opacity: 0, y: 50 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.15,
+          ease: "power2.out",
+        },
+        0.60
+      );
+
+      tlScroll.to(
+        step3,
+        {
+          opacity: 0,
+          y: -30,
+          duration: 0.12,
+          ease: "power2.in",
+        },
+        0.88
       );
     }, container);
 
@@ -223,68 +243,55 @@ export default function Hero() {
     <section
       id="hero-trigger"
       ref={containerRef}
-      className="relative z-10 w-full h-[250vh] bg-[#0E0D0C]"
+      className="relative z-10 w-full h-[320vh] bg-[#0E0D0C]"
     >
       <div id="hero-top" className="absolute top-0 left-0 w-full h-1 pointer-events-none" />
 
-      {/* Pinned viewport stage */}
+      {/* Pinned full-screen viewport */}
       <div
         ref={pinSectionRef}
-        className="relative w-full h-screen overflow-hidden flex items-center justify-center"
-        style={{ perspective: "1200px" }}
+        className="relative w-full h-screen overflow-hidden flex items-center justify-center bg-black"
       >
-        {/* Background layer transitioning to cream */}
-        <div
-          ref={bgRef}
-          className="absolute inset-0 w-full h-full bg-[#0E0D0C] pointer-events-none -z-10"
+        {/* Full-bleed HTML5 Canvas rendering WebP frames (ALWAYS FULL SCREEN) */}
+        <canvas
+          ref={canvasRef}
+          className="absolute inset-0 w-full h-full object-cover pointer-events-none block z-0"
         />
 
-        {/* Video / Canvas Card Container */}
+        {/* Fallback video loop while frames initialize */}
+        {!framesLoaded && (
+          <video
+            className="absolute inset-0 w-full h-full object-cover pointer-events-none z-0"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            poster="/assets/images/hero-poster.jpg"
+          >
+            <source src="/assets/video/hero-loop.mp4" type="video/mp4" />
+          </video>
+        )}
+
+        {/* Cinematic gradient scrims to ensure high contrast for side content */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/45 to-transparent pointer-events-none z-10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/30 pointer-events-none z-10" />
+
+        {/* ======================================================== */}
+        {/* STEP 1: INITIAL HERO HEADLINE (From Screenshot)           */}
+        {/* ======================================================== */}
         <div
-          ref={videoWrapperRef}
-          className="relative w-screen h-screen overflow-hidden transform-gpu will-change-transform flex items-center justify-center bg-black"
-          style={{ transformStyle: "preserve-3d" }}
+          ref={step1Ref}
+          className="absolute inset-0 z-20 flex flex-col justify-end pb-[8vh] sm:pb-[10vh] md:pb-[11vh] px-[6vw] pointer-events-none"
         >
-          {/* HTML5 Canvas scrubbing WebP frames */}
-          <canvas
-            ref={canvasRef}
-            className="absolute inset-0 w-full h-full object-cover pointer-events-none block"
-          />
-
-          {/* Fallback video loop while frames load or if canvas not supported */}
-          {!framesLoaded && (
-            <video
-              className="absolute inset-0 w-full h-full object-cover scale-105 pointer-events-none"
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload="metadata"
-              poster="/assets/images/hero-poster.jpg"
-            >
-              <source src="/assets/video/hero-loop.mp4" type="video/mp4" />
-            </video>
-          )}
-
-          {/* Dark gradient overlay for contrast matching screenshot */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-transparent pointer-events-none" />
-        </div>
-
-        {/* Hero Overlay Text: Matching Reference Screenshot exactly */}
-        <div
-          ref={textRef}
-          className="absolute inset-0 z-10 flex flex-col justify-end pb-[8vh] sm:pb-[10vh] md:pb-[11vh] px-[6vw] pointer-events-none"
-        >
-          <div className="max-w-6xl">
-            {/* Headline */}
-            <h1 className="font-serif text-white font-light text-[clamp(3rem,7.5vw,8.5rem)] leading-[0.96] tracking-[-0.02em] select-none text-left mb-6">
+          <div className="max-w-5xl">
+            <h1 className="font-serif text-white font-light text-[clamp(2.8rem,7vw,8rem)] leading-[0.96] tracking-[-0.02em] select-none text-left mb-6">
               <span className="block">Where architecture</span>
               <span className="block italic font-light text-white/95">
                 meets possibility.
               </span>
             </h1>
 
-            {/* Subtitle tag with thin line matching screenshot */}
             <div className="flex items-center space-x-3 text-[11px] font-sans uppercase tracking-[0.25em] text-white/80 font-medium">
               <span className="w-6 h-[1px] bg-white/60" />
               <span>AURELIA ESTATES</span>
@@ -292,10 +299,84 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Scroll Indicator: matching reference screenshot */}
+        {/* ======================================================== */}
+        {/* STEP 2: PHILOSOPHY CONTENT SCROLLING ON THE SIDE         */}
+        {/* ======================================================== */}
+        <div
+          ref={step2Ref}
+          className="absolute inset-y-0 left-0 w-full md:w-[56vw] lg:w-[46vw] max-w-2xl px-[6vw] flex flex-col justify-center pointer-events-none z-20 opacity-0"
+        >
+          <div className="p-8 sm:p-10 rounded-[2px] bg-black/40 backdrop-blur-md border border-white/10 shadow-2xl text-left space-y-5">
+            <div className="flex items-center space-x-3">
+              <span className="text-[12px] font-sans font-semibold text-[#B8956A] tracking-[0.25em]">
+                01
+              </span>
+              <div className="w-6 h-[1px] bg-[#B8956A]" />
+              <span className="text-[10px] sm:text-[11px] font-sans uppercase tracking-[0.25em] text-white/70 font-medium">
+                PHILOSOPHY OF SANCTUARY
+              </span>
+            </div>
+
+            <h2 className="font-serif font-light text-[clamp(1.8rem,3.2vw,3.2rem)] leading-[1.08] tracking-[-0.015em] text-white/95">
+              We don&apos;t just build spaces. We shape how life is lived.
+            </h2>
+
+            <p className="font-serif text-[1rem] sm:text-[1.1rem] text-white/75 leading-relaxed">
+              Monolithic limestone planes, sheer linen drapery, and pure solar apertures
+              sculpted for unhurried quietude and seamless dialogue with coastal horizons.
+            </p>
+
+            <div className="pt-4 border-t border-white/15 flex items-center justify-between text-[10px] font-sans uppercase tracking-[0.2em] text-[#B8956A]">
+              <span>12,400 SQ FT</span>
+              <span>&bull;</span>
+              <span>PACIFIC PALISADES</span>
+              <span>&bull;</span>
+              <span>WINTER 2027</span>
+            </div>
+          </div>
+        </div>
+
+        {/* ======================================================== */}
+        {/* STEP 3: ARCHITECTURE & LIGHT CONTENT SCROLLING ON SIDE   */}
+        {/* ======================================================== */}
+        <div
+          ref={step3Ref}
+          className="absolute inset-y-0 left-0 w-full md:w-[56vw] lg:w-[46vw] max-w-2xl px-[6vw] flex flex-col justify-center pointer-events-none z-20 opacity-0"
+        >
+          <div className="p-8 sm:p-10 rounded-[2px] bg-black/40 backdrop-blur-md border border-white/10 shadow-2xl text-left space-y-5">
+            <div className="flex items-center space-x-3">
+              <span className="text-[12px] font-sans font-semibold text-[#B8956A] tracking-[0.25em]">
+                02
+              </span>
+              <div className="w-6 h-[1px] bg-[#B8956A]" />
+              <span className="text-[10px] sm:text-[11px] font-sans uppercase tracking-[0.25em] text-white/70 font-medium">
+                THE ART OF PROPORTION
+              </span>
+            </div>
+
+            <h2 className="font-serif font-light text-[clamp(1.8rem,3.2vw,3.2rem)] leading-[1.08] tracking-[-0.015em] text-white/95">
+              Sculpted to capture the dialogue between horizon and earth.
+            </h2>
+
+            <p className="font-serif text-[1rem] sm:text-[1.1rem] text-white/75 leading-relaxed">
+              Every perspective is calibrated to daylight arcs, transforming natural stone
+              and reflective waters into living art from dawn to dusk.
+            </p>
+
+            <div className="pt-4 border-t border-white/15 flex items-center justify-between text-[10px] font-sans uppercase tracking-[0.2em] text-[#B8956A]">
+              <span>DISCREET SALONS</span>
+              <span>&bull;</span>
+              <span>CLOISTERED TERRACES</span>
+              <span>&bull;</span>
+              <span>REFLECTING POOLS</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Scroll Indicator */}
         <div
           ref={scrollIndicatorRef}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center pointer-events-none"
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center pointer-events-none"
         >
           <span className="text-[11px] font-sans uppercase tracking-[0.28em] text-white/80 mb-2 font-medium">
             SCROLL
@@ -303,10 +384,10 @@ export default function Hero() {
           <div className="w-[1px] h-7 bg-white/70" />
         </div>
 
-        {/* Bottom Left Badge: Circular badge matching reference screenshot */}
+        {/* Circular N Badge (Matching reference screenshot) */}
         <div
           ref={bottomBadgeRef}
-          className="absolute bottom-8 left-[6vw] z-10 flex items-center justify-center w-7 h-7 rounded-full bg-black/85 border border-white/20 text-white text-[11px] font-sans font-bold shadow-lg pointer-events-none"
+          className="absolute bottom-8 left-[6vw] z-20 flex items-center justify-center w-7 h-7 rounded-full bg-black/85 border border-white/20 text-white text-[11px] font-sans font-bold shadow-lg pointer-events-none"
         >
           N
         </div>
