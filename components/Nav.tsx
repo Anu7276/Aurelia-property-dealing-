@@ -28,62 +28,62 @@ export default function Nav() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 h-[76px] transition-all duration-500 pointer-events-none bg-transparent ${
+      className={`fixed top-0 left-0 right-0 z-50 h-[80px] transition-all duration-500 pointer-events-none bg-transparent ${
         isPastHero ? "border-b border-[#1B1A17]/10" : "border-b border-transparent"
       }`}
     >
       <div className="max-w-[1920px] h-full mx-auto px-[6vw] flex items-center justify-between pointer-events-auto mix-blend-difference text-[#F5F1E8]">
-        {/* Wordmark with EST. 2024 badge */}
+        {/* Left: Wordmark with EST. 2024 exactly as in reference */}
         <a
           href="#"
           onClick={(e) => handleNavClick(e, "#hero-top")}
           className="group flex flex-col text-left transition-opacity duration-300 hover:opacity-75 focus-visible:opacity-100"
           aria-label="Aurelia Home"
         >
-          <span className="font-serif text-[clamp(1.2rem,1.8vw,1.6rem)] font-light tracking-[0.28em] uppercase leading-none">
+          <span className="font-serif text-[clamp(1.2rem,1.8vw,1.65rem)] font-light tracking-[0.32em] uppercase leading-tight">
             AURELIA
           </span>
-          <span className="text-[9px] font-sans uppercase tracking-[0.3em] opacity-70 mt-1">
+          <span className="text-[9px] font-sans uppercase tracking-[0.32em] opacity-80 -mt-0.5">
             EST. 2024
           </span>
         </a>
 
-        {/* Navigation Links */}
-        <nav className="flex items-center space-x-6 sm:space-x-10 text-[11px] sm:text-[12px] font-sans font-medium uppercase tracking-[0.22em]">
+        {/* Right: Navigation items with bordered CRAFT button matching reference */}
+        <nav className="flex items-center space-x-6 sm:space-x-8 lg:space-x-10 text-[11px] sm:text-[12px] font-sans font-medium uppercase tracking-[0.22em]">
           <a
             href="#philosophy"
             onClick={(e) => handleNavClick(e, "#philosophy")}
-            className="relative py-1 transition-opacity duration-300 hover:opacity-70 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[1px] after:bg-current after:origin-right after:scale-x-0 hover:after:scale-x-100 hover:after:origin-left after:transition-transform after:duration-300"
+            className="py-1 transition-opacity duration-300 hover:opacity-70 focus-visible:opacity-100"
           >
-            Philosophy
+            PHILOSOPHY
           </a>
           <a
             href="#residences"
             onClick={(e) => handleNavClick(e, "#residences")}
-            className="relative py-1 transition-opacity duration-300 hover:opacity-70 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[1px] after:bg-current after:origin-right after:scale-x-0 hover:after:scale-x-100 hover:after:origin-left after:transition-transform after:duration-300"
+            className="py-1 transition-opacity duration-300 hover:opacity-70 focus-visible:opacity-100"
           >
-            Projects
+            PROJECTS
           </a>
           <a
             href="#craft"
             onClick={(e) => handleNavClick(e, "#craft")}
-            className="hidden sm:inline-block relative py-1 transition-opacity duration-300 hover:opacity-70 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[1px] after:bg-current after:origin-right after:scale-x-0 hover:after:scale-x-100 hover:after:origin-left after:transition-transform after:duration-300"
+            className="border border-current px-3 py-1 rounded-[1px] transition-all duration-300 hover:bg-current hover:text-black focus-visible:opacity-100"
           >
-            Craft
+            CRAFT
           </a>
           <a
             href="#gallery"
             onClick={(e) => handleNavClick(e, "#gallery")}
-            className="relative py-1 transition-opacity duration-300 hover:opacity-70 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[1px] after:bg-current after:origin-right after:scale-x-0 hover:after:scale-x-100 hover:after:origin-left after:transition-transform after:duration-300"
+            className="py-1 transition-opacity duration-300 hover:opacity-70 focus-visible:opacity-100"
           >
-            Gallery
+            GALLERY
           </a>
           <a
             href="#enquire"
             onClick={(e) => handleNavClick(e, "#enquire")}
-            className="relative py-1 transition-opacity duration-300 hover:opacity-70 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[1px] after:bg-current after:origin-right after:scale-x-0 hover:after:scale-x-100 hover:after:origin-left after:transition-transform after:duration-300"
+            className="py-1 transition-opacity duration-300 hover:opacity-70 focus-visible:opacity-100"
           >
-            Enquire
+            ENQUIRE
           </a>
         </nav>
       </div>
