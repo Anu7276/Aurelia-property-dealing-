@@ -5,19 +5,34 @@ import { useSmoothScroll } from "./SmoothScroll";
 import { ScrollTrigger } from "@/lib/gsap";
 
 export default function Nav() {
-  const [isPastHero, setIsPastHero] = useState(false);
+  const [isLightSection, setIsLightSection] = useState(false);
   const { scrollTo } = useSmoothScroll();
 
   useEffect(() => {
-    const st = ScrollTrigger.create({
-      trigger: "#hero-trigger",
-      start: "bottom top+=72",
-      onEnter: () => setIsPastHero(true),
-      onLeaveBack: () => setIsPastHero(false),
+    // ScrollTrigger to detect when user enters cream / light sections
+    const st1 = ScrollTrigger.create({
+      trigger: "#philosophy",
+      start: "top top+=80",
+      endTrigger: "#gallery",
+      end: "top top+=80",
+      onEnter: () => setIsLightSection(true),
+      onLeaveBack: () => setIsLightSection(false),
+      onEnterBack: () => setIsLightSection(true),
+      onLeave: () => setIsLightSection(false),
+    });
+
+    const st2 = ScrollTrigger.create({
+      trigger: "footer",
+      start: "top top+=80",
+      onEnter: () => setIsLightSection(true),
+      onLeaveBack: () => setIsLightSection(false),
+      onEnterBack: () => setIsLightSection(true),
+      onLeave: () => setIsLightSection(false),
     });
 
     return () => {
-      st.kill();
+      st1.kill();
+      st2.kill();
     };
   }, []);
 
@@ -28,12 +43,14 @@ export default function Nav() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 h-[80px] transition-all duration-500 pointer-events-none bg-transparent ${
-        isPastHero ? "border-b border-[#1B1A17]/10" : "border-b border-transparent"
+      className={`fixed top-0 left-0 right-0 z-50 h-[80px] transition-all duration-500 pointer-events-none ${
+        isLightSection
+          ? "bg-[#F5F1E8]/95 backdrop-blur-md border-b border-[#1B1A17]/10 shadow-xs text-[#1B1A17]"
+          : "bg-black/40 backdrop-blur-md border-b border-white/10 shadow-sm text-white"
       }`}
     >
-      <div className="max-w-[1920px] h-full mx-auto px-[6vw] flex items-center justify-between pointer-events-auto mix-blend-difference text-[#F5F1E8]">
-        {/* Left: Wordmark with EST. 2024 exactly as in reference */}
+      <div className="max-w-[1920px] h-full mx-auto px-[6vw] flex items-center justify-between pointer-events-auto">
+        {/* Left: Wordmark with EST. 2024 */}
         <a
           href="#"
           onClick={(e) => handleNavClick(e, "#hero-top")}
@@ -43,12 +60,16 @@ export default function Nav() {
           <span className="font-serif text-[clamp(1.2rem,1.8vw,1.65rem)] font-light tracking-[0.32em] uppercase leading-tight">
             AURELIA
           </span>
-          <span className="text-[9px] font-sans uppercase tracking-[0.32em] opacity-80 -mt-0.5">
+          <span
+            className={`text-[9px] font-sans uppercase tracking-[0.32em] mt-0.5 transition-colors ${
+              isLightSection ? "text-[#6F6A5E]" : "text-white/70"
+            }`}
+          >
             EST. 2024
           </span>
         </a>
 
-        {/* Right: Navigation items with bordered CRAFT button matching reference */}
+        {/* Right: Navigation items */}
         <nav className="flex items-center space-x-6 sm:space-x-8 lg:space-x-10 text-[11px] sm:text-[12px] font-sans font-medium uppercase tracking-[0.22em]">
           <a
             href="#philosophy"
@@ -67,7 +88,11 @@ export default function Nav() {
           <a
             href="#craft"
             onClick={(e) => handleNavClick(e, "#craft")}
-            className="border border-current px-3 py-1 rounded-[1px] transition-all duration-300 hover:bg-current hover:text-black focus-visible:opacity-100"
+            className={`border px-3.5 py-1 rounded-[1px] transition-all duration-300 focus-visible:opacity-100 ${
+              isLightSection
+                ? "border-[#1B1A17] text-[#1B1A17] hover:bg-[#1B1A17] hover:text-[#F5F1E8]"
+                : "border-white/70 text-white hover:bg-white hover:text-black"
+            }`}
           >
             CRAFT
           </a>

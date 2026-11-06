@@ -41,7 +41,7 @@ export default function FeaturedResidence() {
         );
       }
 
-      // Project blocks reveal
+      // Project blocks reveal with clip-path wipe
       const blocks = container.querySelectorAll(".residence-card");
       blocks.forEach((block) => {
         const imgWrap = block.querySelector(".residence-img-reveal");
@@ -97,12 +97,15 @@ export default function FeaturedResidence() {
       className="relative z-20 w-full min-h-screen bg-[#F5F1E8] py-28 lg:py-40 px-[6vw] text-[#1B1A17] overflow-hidden"
     >
       <div className="w-full max-w-[1920px] mx-auto">
-        {/* Selected Works Header (as seen in Reference Video Frame 05) */}
+        {/* Selected Works Header */}
         <div ref={headerRef} className="mb-20 sm:mb-28 border-b border-[#1B1A17]/10 pb-12">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
-            <span className="text-[11px] font-sans uppercase tracking-[0.25em] text-[#B8956A] font-semibold">
-              ARCHITECTURE / DEVELOPMENT
-            </span>
+            <div className="flex items-center space-x-3">
+              <span className="w-6 h-[1px] bg-[#B8956A]" />
+              <span className="text-[11px] font-sans uppercase tracking-[0.25em] text-[#B8956A] font-semibold">
+                CURATED ARCHITECTURAL PORTFOLIO
+              </span>
+            </div>
             <div className="flex items-center space-x-3 text-[11px] font-sans uppercase tracking-[0.22em] text-[#6F6A5E]">
               <span>AURELIA</span>
               <span className="w-5 h-[1px] bg-[#1B1A17]/20" />
@@ -117,28 +120,29 @@ export default function FeaturedResidence() {
 
         {/* Project 1: Aurelia One */}
         <div className="residence-card grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center relative mb-36 sm:mb-48">
-          {/* Watermark 02 in Background */}
+          {/* Giant Ghost Watermark 01 */}
           <div className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none select-none font-serif font-light text-[clamp(12rem,28vw,32rem)] text-[#1B1A17]/[0.03] leading-none -z-10">
             01
           </div>
 
-          {/* Left Column: Image (5 cols) */}
+          {/* Left Column: Image with Video-like Ease-Out Drift */}
           <div className="lg:col-span-5 lg:col-start-1">
-            <div className="residence-img-reveal overflow-hidden rounded-[2px] bg-[#EFE9DB] shadow-md aspect-[3/4] w-full max-w-[480px] mx-auto will-change-transform">
+            <div className="residence-img-reveal overflow-hidden rounded-[2px] bg-[#EFE9DB] shadow-md aspect-[3/4] w-full max-w-[480px] mx-auto will-change-transform group">
               <PictureImage
                 src="/assets/images/aurelia-one"
                 alt="Aurelia One flagship residence"
                 className="w-full h-full"
                 sizes="(max-width: 1024px) 90vw, 40vw"
+                cinematic={true}
               />
             </div>
           </div>
 
-          {/* Right Column: Details (6 cols) */}
+          {/* Right Column: Editorial Details */}
           <div className="residence-details lg:col-span-6 lg:col-start-7 space-y-8">
             <div>
               <span className="text-[11px] font-sans uppercase tracking-[0.25em] text-[#B8956A] font-semibold block mb-3">
-                PRIMARY PENTHOUSE SANCTUARY
+                FLAGSHIP PENTHOUSE SANCTUARY
               </span>
               <h3 className="font-serif font-light text-[clamp(3rem,6vw,5.5rem)] leading-[0.96] tracking-[-0.02em] text-[#1B1A17]">
                 Aurelia One
@@ -146,8 +150,9 @@ export default function FeaturedResidence() {
             </div>
 
             <p className="font-serif text-[1.125rem] sm:text-[1.25rem] text-[#6F6A5E] leading-relaxed max-w-xl">
-              Suspended in absolute privacy above the horizon, Aurelia One merges
-              monolithic limestone planes with expansive glass solariums for timeless contemplation.
+              Suspended in absolute privacy above the Pacific horizon, Aurelia One merges
+              Portuguese Moleanos limestone planes, bronze-profile joinery, and expansive
+              acoustic solariums for quiet, timeless contemplation.
             </p>
 
             {/* Hairline-divided row with 3 key facts */}
@@ -162,7 +167,7 @@ export default function FeaturedResidence() {
               </div>
               <div className="px-4 text-left">
                 <span className="block text-[10px] sm:text-[11px] font-sans uppercase tracking-[0.2em] text-[#6F6A5E] mb-1">
-                  Area
+                  Primary Area
                 </span>
                 <span className="font-serif text-[clamp(1.2rem,2.2vw,1.75rem)] font-light text-[#1B1A17]">
                   12,400 sq ft
@@ -206,18 +211,18 @@ export default function FeaturedResidence() {
           </div>
         </div>
 
-        {/* Project 2: Aurelia Verde (as seen in Reference Video Frame 07 & 08) */}
+        {/* Project 2: Aurelia Verde */}
         <div className="residence-card grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center relative">
-          {/* Watermark 02 in Background */}
+          {/* Giant Ghost Watermark 02 */}
           <div className="absolute left-0 top-1/2 -translate-y-1/2 pointer-events-none select-none font-serif font-light text-[clamp(12rem,28vw,32rem)] text-[#1B1A17]/[0.03] leading-none -z-10">
             02
           </div>
 
-          {/* Left Column: Details (6 cols, ordered first on desktop) */}
+          {/* Left Column: Details */}
           <div className="residence-details lg:col-span-6 lg:col-start-1 order-2 lg:order-1 space-y-8">
             <div>
               <span className="text-[11px] font-sans uppercase tracking-[0.25em] text-[#B8956A] font-semibold block mb-3">
-                02 — CONTEMPORARY VILLAS
+                02 — BOTANICAL CLOISTERED VILLAS
               </span>
               <h3 className="font-serif font-light text-[clamp(3rem,6vw,5.5rem)] leading-[0.96] tracking-[-0.02em] text-[#1B1A17]">
                 Aurelia Verde
@@ -225,8 +230,9 @@ export default function FeaturedResidence() {
             </div>
 
             <p className="font-serif text-[1.125rem] sm:text-[1.25rem] text-[#6F6A5E] leading-relaxed max-w-xl">
-              Private villas nestled in tiered cloisters, featuring open botanical terraces
-              and reflecting pools that reach outward to meet the coastal horizon.
+              Cascading private villas nestled in tiered limestone cloisters. Open botanical
+              terraces, shaded teak loggias, and reflecting pools open to meet coastal breezes
+              and sunset horizons.
             </p>
 
             <div className="grid grid-cols-3 border-y border-[#1B1A17]/15 py-6 my-8 divide-x divide-[#1B1A17]/15">
@@ -240,7 +246,7 @@ export default function FeaturedResidence() {
               </div>
               <div className="px-4 text-left">
                 <span className="block text-[10px] sm:text-[11px] font-sans uppercase tracking-[0.2em] text-[#6F6A5E] mb-1">
-                  Area
+                  Primary Area
                 </span>
                 <span className="font-serif text-[clamp(1.2rem,2.2vw,1.75rem)] font-light text-[#1B1A17]">
                   8,600 sq ft
@@ -282,14 +288,15 @@ export default function FeaturedResidence() {
             </div>
           </div>
 
-          {/* Right Column: Image (5 cols) */}
+          {/* Right Column: Image with Video-like Ease-Out Drift */}
           <div className="lg:col-span-5 lg:col-start-8 order-1 lg:order-2">
-            <div className="residence-img-reveal overflow-hidden rounded-[2px] bg-[#EFE9DB] shadow-md aspect-[3/4] w-full max-w-[480px] mx-auto will-change-transform">
+            <div className="residence-img-reveal overflow-hidden rounded-[2px] bg-[#EFE9DB] shadow-md aspect-[3/4] w-full max-w-[480px] mx-auto will-change-transform group">
               <PictureImage
                 src="/assets/images/hero-courtyard"
                 alt="Aurelia Verde contemporary villa courtyard"
                 className="w-full h-full"
                 sizes="(max-width: 1024px) 90vw, 40vw"
+                cinematic={true}
               />
             </div>
           </div>

@@ -10,6 +10,7 @@ interface CraftBlock {
   tag: string;
   subtitle?: string;
   description: string;
+  materials: string;
   imageSrc: string;
   imageAlt: string;
   layout: "architecture" | "living" | "light";
@@ -19,10 +20,11 @@ const craftBlocks: CraftBlock[] = [
   {
     index: "01",
     word: "Architecture",
-    subtitle: "A film in...",
-    tag: "MONUMENTAL FORM & TIMELESS PROPORTION",
+    subtitle: "A monograph in...",
+    tag: "MONUMENTAL PROPORTIONS & MASS",
     description:
       "Sculpted stone and restrained geometries elevate structural mass into quiet, permanent contemplation across the landscape.",
+    materials: "MOLEANOS LIMESTONE • BRONZE JOISTS • STRUCTURAL GLASS",
     imageSrc: "/assets/images/architecture",
     imageAlt: "Aurelia modernist tower architecture",
     layout: "architecture",
@@ -32,7 +34,8 @@ const craftBlocks: CraftBlock[] = [
     word: "Material & Living",
     tag: "THE ART OF INTENTIONAL REPOSE",
     description:
-      "Sanctuaries of effortless calm where cloistered terraces open toward sunken water basins and endless sky.",
+      "Sanctuaries of effortless calm where cloistered terraces open toward sunken water basins and endless Pacific horizons.",
+    materials: "NATURAL HYDRAULIC PLASTER • OILED TEAK • BASALT",
     imageSrc: "/assets/images/living",
     imageAlt: "Aurelia pool courtyard and living sanctuary",
     layout: "living",
@@ -42,7 +45,8 @@ const craftBlocks: CraftBlock[] = [
     word: "Light",
     tag: "LUMINESCENT ARCS & SHADOWPLAY",
     description:
-      "Orchestrated solar apertures filter raw radiance across natural plaster, shifting the atmosphere through every hour of the day.",
+      "Orchestrated solar apertures filter raw radiance across natural plaster, shifting the atmosphere through every hour of the solar cycle.",
+    materials: "ACOUSTIC DOUBLE GLAZING • BRONZE LOUVRES • LINEAR LIGHTWELLS",
     imageSrc: "/assets/images/light",
     imageAlt: "Aurelia sunlit interior living space",
     layout: "light",
@@ -78,22 +82,7 @@ export default function Pillars() {
             { clipPath: "inset(100% 0% 0% 0%)" },
             {
               clipPath: "inset(0% 0% 0% 0%)",
-              duration: 1.2,
-              ease: "power3.out",
-              scrollTrigger: {
-                trigger: section,
-                start: "top 75%",
-                once: true,
-              },
-            }
-          );
-
-          gsap.fromTo(
-            img,
-            { scale: 1.15 },
-            {
-              scale: 1,
-              duration: 1.4,
+              duration: 1.3,
               ease: "power3.out",
               scrollTrigger: {
                 trigger: section,
@@ -142,7 +131,7 @@ export default function Pillars() {
         }
       });
 
-      // Concluding statement "Built for today." (Reference Video Frame 13)
+      // Concluding statement "Built for today."
       if (concludingText) {
         gsap.fromTo(
           concludingText.children,
@@ -180,7 +169,7 @@ export default function Pillars() {
             key={pillar.index}
             className="craft-section relative min-h-screen w-full flex flex-col justify-center px-[6vw] py-20 lg:py-28 overflow-hidden bg-[#F5F1E8] text-[#1B1A17]"
           >
-            {/* Top Index and Hairline matching Video Reference */}
+            {/* Top Index and Hairline */}
             <div className="w-full max-w-[1920px] mx-auto flex items-center justify-between pb-6 mb-8 lg:mb-12 border-b border-[#1B1A17]/10">
               <div className="flex items-center space-x-3">
                 <span className="text-[12px] font-sans uppercase tracking-[0.25em] text-[#B8956A] font-semibold">
@@ -202,7 +191,7 @@ export default function Pillars() {
 
             {/* Main Content Grid: 12 Columns */}
             <div className="w-full max-w-[1920px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center relative">
-              {/* Architecture: Word left, Image right, Text left */}
+              {/* Architecture */}
               {isArch && (
                 <>
                   <div className="lg:col-span-12 z-20 relative select-none pointer-events-none mb-[-2vw] lg:mb-[-4vw]">
@@ -215,19 +204,23 @@ export default function Pillars() {
                     <span className="text-[11px] font-sans uppercase tracking-[0.25em] text-[#B8956A] font-semibold block">
                       STRUCTURE &amp; MONOLITH
                     </span>
-                    <p className="font-serif text-[1rem] leading-[1.7] text-[#6F6A5E] max-w-[34ch]">
+                    <p className="font-serif text-[1.125rem] leading-[1.7] text-[#6F6A5E] max-w-[34ch]">
                       {pillar.description}
                     </p>
+                    <div className="pt-3 border-t border-[#1B1A17]/10 text-[10px] font-sans uppercase tracking-[0.2em] text-[#B8956A]">
+                      {pillar.materials}
+                    </div>
                   </div>
 
                   <div className="lg:col-span-5 lg:col-start-8 z-10">
                     <div className="craft-parallax will-change-transform flex justify-end">
-                      <div className="craft-image-reveal overflow-hidden rounded-[2px] bg-[#EFE9DB] shadow-sm w-full max-w-[clamp(260px,28vw,460px)] max-h-[80vh] aspect-[3/4]">
+                      <div className="craft-image-reveal overflow-hidden rounded-[2px] bg-[#EFE9DB] shadow-md w-full max-w-[clamp(260px,28vw,460px)] max-h-[80vh] aspect-[3/4]">
                         <PictureImage
                           src={pillar.imageSrc}
                           alt={pillar.imageAlt}
                           className="w-full h-full"
                           sizes="(max-width: 1024px) 85vw, 28vw"
+                          cinematic={true}
                         />
                       </div>
                     </div>
@@ -235,7 +228,7 @@ export default function Pillars() {
                 </>
               )}
 
-              {/* Living: Image left, Word right, Text right */}
+              {/* Living */}
               {isLiving && (
                 <>
                   <div className="lg:col-span-12 z-20 relative select-none pointer-events-none mb-[-2vw] lg:mb-[-4vw] lg:text-right">
@@ -246,12 +239,13 @@ export default function Pillars() {
 
                   <div className="lg:col-span-5 lg:col-start-1 z-10 order-2 lg:order-1">
                     <div className="craft-parallax will-change-transform flex justify-start">
-                      <div className="craft-image-reveal overflow-hidden rounded-[2px] bg-[#EFE9DB] shadow-sm w-full max-w-[clamp(260px,28vw,460px)] max-h-[80vh] aspect-[3/4]">
+                      <div className="craft-image-reveal overflow-hidden rounded-[2px] bg-[#EFE9DB] shadow-md w-full max-w-[clamp(260px,28vw,460px)] max-h-[80vh] aspect-[3/4]">
                         <PictureImage
                           src={pillar.imageSrc}
                           alt={pillar.imageAlt}
                           className="w-full h-full"
                           sizes="(max-width: 1024px) 85vw, 28vw"
+                          cinematic={true}
                         />
                       </div>
                     </div>
@@ -261,14 +255,17 @@ export default function Pillars() {
                     <span className="text-[11px] font-sans uppercase tracking-[0.25em] text-[#B8956A] font-semibold block">
                       SANCTUARY &amp; REPOSE
                     </span>
-                    <p className="font-serif text-[1rem] leading-[1.7] text-[#6F6A5E] max-w-[34ch]">
+                    <p className="font-serif text-[1.125rem] leading-[1.7] text-[#6F6A5E] max-w-[34ch]">
                       {pillar.description}
                     </p>
+                    <div className="pt-3 border-t border-[#1B1A17]/10 text-[10px] font-sans uppercase tracking-[0.2em] text-[#B8956A]">
+                      {pillar.materials}
+                    </div>
                   </div>
                 </>
               )}
 
-              {/* Light: Word left, Image center-right, Text left */}
+              {/* Light */}
               {isLight && (
                 <>
                   <div className="lg:col-span-12 z-20 relative select-none pointer-events-none mb-[-2vw] lg:mb-[-4vw]">
@@ -281,19 +278,23 @@ export default function Pillars() {
                     <span className="text-[11px] font-sans uppercase tracking-[0.25em] text-[#B8956A] font-semibold block">
                       SOLAR GEOMETRY
                     </span>
-                    <p className="font-serif text-[1rem] leading-[1.7] text-[#6F6A5E] max-w-[34ch]">
+                    <p className="font-serif text-[1.125rem] leading-[1.7] text-[#6F6A5E] max-w-[34ch]">
                       {pillar.description}
                     </p>
+                    <div className="pt-3 border-t border-[#1B1A17]/10 text-[10px] font-sans uppercase tracking-[0.2em] text-[#B8956A]">
+                      {pillar.materials}
+                    </div>
                   </div>
 
                   <div className="lg:col-span-5 lg:col-start-7 z-10">
                     <div className="craft-parallax will-change-transform flex justify-start lg:justify-center">
-                      <div className="craft-image-reveal overflow-hidden rounded-[2px] bg-[#EFE9DB] shadow-sm w-full max-w-[clamp(260px,28vw,460px)] max-h-[80vh] aspect-[3/4]">
+                      <div className="craft-image-reveal overflow-hidden rounded-[2px] bg-[#EFE9DB] shadow-md w-full max-w-[clamp(260px,28vw,460px)] max-h-[80vh] aspect-[3/4]">
                         <PictureImage
                           src={pillar.imageSrc}
                           alt={pillar.imageAlt}
                           className="w-full h-full"
                           sizes="(max-width: 1024px) 85vw, 28vw"
+                          cinematic={true}
                         />
                       </div>
                     </div>
@@ -309,10 +310,11 @@ export default function Pillars() {
         );
       })}
 
-      {/* "Built for today." (Reference Video Frame 13) */}
+      {/* "Built for today." */}
       <section className="relative w-full py-28 lg:py-40 px-[6vw] bg-[#F5F1E8] border-t border-[#1B1A17]/10 flex flex-col justify-center">
         <div ref={concludingTextRef} className="w-full max-w-[1920px] mx-auto">
           <div className="flex items-center space-x-3 mb-6">
+            <span className="w-6 h-[1px] bg-[#B8956A]" />
             <span className="text-[11px] font-sans uppercase tracking-[0.25em] text-[#B8956A] font-semibold">
               03 / PHILOSOPHY OF PERMANENCE
             </span>
