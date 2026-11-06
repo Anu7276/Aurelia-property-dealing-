@@ -304,9 +304,9 @@ export default function Hero() {
         {/* ======================================================== */}
         <div
           ref={step2Ref}
-          className="absolute inset-y-0 left-0 w-full md:w-[56vw] lg:w-[46vw] max-w-2xl px-[6vw] flex flex-col justify-center pointer-events-none z-20 opacity-0"
+          className="absolute inset-y-0 left-0 w-full md:w-[56vw] lg:w-[46vw] max-w-2xl px-5 sm:px-8 md:px-[6vw] flex flex-col justify-center pointer-events-none z-20 opacity-0"
         >
-          <div className="p-8 sm:p-10 rounded-[2px] bg-black/40 backdrop-blur-md border border-white/10 shadow-2xl text-left space-y-5">
+          <div className="p-6 sm:p-10 rounded-[2px] bg-black/50 backdrop-blur-md border border-white/10 shadow-2xl text-left space-y-4 sm:space-y-5">
             <div className="flex items-center space-x-3">
               <span className="text-[12px] font-sans font-semibold text-[#B8956A] tracking-[0.25em]">
                 01
@@ -317,11 +317,11 @@ export default function Hero() {
               </span>
             </div>
 
-            <h2 className="font-serif font-light text-[clamp(1.8rem,3.2vw,3.2rem)] leading-[1.08] tracking-[-0.015em] text-white/95">
+            <h2 className="font-serif font-light text-[clamp(1.6rem,3.2vw,3.2rem)] leading-[1.1] tracking-[-0.015em] text-white/95">
               We don&apos;t just build spaces. We shape how life is lived.
             </h2>
 
-            <p className="font-serif text-[1rem] sm:text-[1.1rem] text-white/75 leading-relaxed">
+            <p className="font-serif text-[0.95rem] sm:text-[1.1rem] text-white/80 leading-relaxed">
               Monolithic limestone planes, sheer linen drapery, and pure solar apertures
               sculpted for unhurried quietude and seamless dialogue with coastal horizons.
             </p>
@@ -341,9 +341,9 @@ export default function Hero() {
         {/* ======================================================== */}
         <div
           ref={step3Ref}
-          className="absolute inset-y-0 left-0 w-full md:w-[56vw] lg:w-[46vw] max-w-2xl px-[6vw] flex flex-col justify-center pointer-events-none z-20 opacity-0"
+          className="absolute inset-y-0 left-0 w-full md:w-[56vw] lg:w-[46vw] max-w-2xl px-5 sm:px-8 md:px-[6vw] flex flex-col justify-center pointer-events-none z-20 opacity-0"
         >
-          <div className="p-8 sm:p-10 rounded-[2px] bg-black/40 backdrop-blur-md border border-white/10 shadow-2xl text-left space-y-5">
+          <div className="p-6 sm:p-10 rounded-[2px] bg-black/50 backdrop-blur-md border border-white/10 shadow-2xl text-left space-y-4 sm:space-y-5">
             <div className="flex items-center space-x-3">
               <span className="text-[12px] font-sans font-semibold text-[#B8956A] tracking-[0.25em]">
                 02
@@ -354,11 +354,11 @@ export default function Hero() {
               </span>
             </div>
 
-            <h2 className="font-serif font-light text-[clamp(1.8rem,3.2vw,3.2rem)] leading-[1.08] tracking-[-0.015em] text-white/95">
+            <h2 className="font-serif font-light text-[clamp(1.6rem,3.2vw,3.2rem)] leading-[1.1] tracking-[-0.015em] text-white/95">
               Sculpted to capture the dialogue between horizon and earth.
             </h2>
 
-            <p className="font-serif text-[1rem] sm:text-[1.1rem] text-white/75 leading-relaxed">
+            <p className="font-serif text-[0.95rem] sm:text-[1.1rem] text-white/80 leading-relaxed">
               Every perspective is calibrated to daylight arcs, transforming natural stone
               and reflective waters into living art from dawn to dusk.
             </p>

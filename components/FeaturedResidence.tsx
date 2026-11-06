@@ -120,11 +120,6 @@ export default function FeaturedResidence() {
 
         {/* Project 1: Aurelia One */}
         <div className="residence-card grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center relative mb-36 sm:mb-48">
-          {/* Giant Ghost Watermark 01 */}
-          <div className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none select-none font-serif font-light text-[clamp(12rem,28vw,32rem)] text-[#1B1A17]/[0.03] leading-none -z-10">
-            01
-          </div>
-
           {/* Left Column: Image with Video-like Ease-Out Drift */}
           <div className="lg:col-span-5 lg:col-start-1">
             <div className="residence-img-reveal overflow-hidden rounded-[2px] bg-[#EFE9DB] shadow-md aspect-[3/4] w-full max-w-[480px] mx-auto will-change-transform group">
@@ -213,11 +208,6 @@ export default function FeaturedResidence() {
 
         {/* Project 2: Aurelia Verde */}
         <div className="residence-card grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center relative">
-          {/* Giant Ghost Watermark 02 */}
-          <div className="absolute left-0 top-1/2 -translate-y-1/2 pointer-events-none select-none font-serif font-light text-[clamp(12rem,28vw,32rem)] text-[#1B1A17]/[0.03] leading-none -z-10">
-            02
-          </div>
-
           {/* Left Column: Details */}
           <div className="residence-details lg:col-span-6 lg:col-start-1 order-2 lg:order-1 space-y-8">
             <div>

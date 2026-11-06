@@ -71,13 +71,8 @@ export default function Statement() {
     <section
       id="philosophy"
       ref={sectionRef}
-      className="relative z-20 w-full min-h-screen bg-[#F5F1E8] flex flex-col justify-center pt-[20vh] pb-[15vh] px-[6vw] text-[#1B1A17] overflow-hidden"
+      className="relative z-20 w-full min-h-screen bg-[#F5F1E8] flex flex-col justify-center pt-[20vh] pb-[15vh] px-5 sm:px-8 lg:px-[6vw] text-[#1B1A17] overflow-hidden"
     >
-      {/* Subtle giant architectural ghost watermark */}
-      <div className="absolute right-[4vw] top-1/2 -translate-y-1/2 pointer-events-none select-none font-serif font-light text-[clamp(14rem,32vw,36rem)] text-[#1B1A17]/[0.03] leading-none -z-10">
-        01
-      </div>
-
       <div className="max-w-[1920px] mx-auto w-full grid grid-cols-1 md:grid-cols-12 gap-y-12 relative">
         {/* Caption row with reference indexing */}
         <div ref={captionRef} className="md:col-span-12 flex items-center space-x-4 mb-4">
