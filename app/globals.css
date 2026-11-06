@@ -96,3 +96,53 @@ html.lenis, html.lenis body {
 .lenis.lenis-smooth iframe {
   pointer-events: none;
 }
+
+/* ========================================================
+   RESPONSIVE MEDIA QUERIES & MOBILE ADAPTATION
+   ======================================================== */
+@media (max-width: 1024px) {
+  .craft-word-title {
+    line-height: 0.95 !important;
+    word-break: break-word;
+    margin-bottom: 1.5rem !important;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Prevent awkward mobile padding or horizontal shift */
+  .craft-section {
+    padding-top: 5rem !important;
+    padding-bottom: 5rem !important;
+    min-height: auto !important;
+  }
+
+  /* Make sure giant word never causes side scrolling */
+  .craft-word-title {
+    font-size: clamp(3rem, 12vw, 5rem) !important;
+    line-height: 1.0 !important;
+  }
+
+  /* Ensure text blocks have generous readable line spacing on phones */
+  .craft-text-elem p {
+    font-size: 1.3rem !important;
+    line-height: 1.55 !important;
+  }
+
+  /* Ensure video & canvas overlay cards are full width */
+  .hero-narrative-card {
+    max-width: 92vw !important;
+    left: 4vw !important;
+    right: 4vw !important;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Ultra-small mobile screens (375px - 480px) */
+  html {
+    scroll-padding-top: 4.5rem;
+  }
+
+  .craft-word-title {
+    font-size: clamp(2.6rem, 11vw, 4.2rem) !important;
+  }
+}

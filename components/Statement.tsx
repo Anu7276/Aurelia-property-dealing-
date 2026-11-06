@@ -94,7 +94,7 @@ export default function Statement() {
         <div className="md:col-span-11 lg:col-span-10">
           <h2
             ref={textRef}
-            className="font-serif font-light text-[clamp(2.2rem,5.2vw,5.5rem)] leading-[1.08] tracking-[-0.015em] text-[#1B1A17]"
+            className="font-serif font-light text-[clamp(2.5rem,6.2vw,6.5rem)] leading-[1.04] tracking-[-0.02em] text-[#1B1A17]"
           >
             {words.map((word, i) => (
               <span

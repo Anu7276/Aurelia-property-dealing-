@@ -141,15 +141,15 @@ export default function FeaturedResidence() {
           {/* Right Column: Editorial Details */}
           <div className="residence-details lg:col-span-6 lg:col-start-7 space-y-8">
             <div>
-              <span className="text-[11px] font-sans uppercase tracking-[0.25em] text-[#B8956A] font-semibold block mb-3">
+              <span className="text-[12px] sm:text-[13px] font-sans uppercase tracking-[0.28em] text-[#B8956A] font-semibold block mb-3">
                 FLAGSHIP PENTHOUSE SANCTUARY
               </span>
-              <h3 className="font-serif font-light text-[clamp(3rem,6vw,5.5rem)] leading-[0.96] tracking-[-0.02em] text-[#1B1A17]">
+              <h3 className="font-serif font-light text-[clamp(3.2rem,6.5vw,5.8rem)] leading-[0.96] tracking-[-0.02em] text-[#1B1A17]">
                 Aurelia One
               </h3>
             </div>
 
-            <p className="font-serif text-[1.125rem] sm:text-[1.25rem] text-[#6F6A5E] leading-relaxed max-w-xl">
+            <p className="font-serif text-[clamp(1.2rem,1.7vw,1.55rem)] text-[#2C2A26] font-light leading-relaxed max-w-xl">
               Suspended in absolute privacy above the Pacific horizon, Aurelia One merges
               Portuguese Moleanos limestone planes, bronze-profile joinery, and expansive
               acoustic solariums for quiet, timeless contemplation.
@@ -158,26 +158,26 @@ export default function FeaturedResidence() {
             {/* Hairline-divided row with 3 key facts */}
             <div className="grid grid-cols-3 border-y border-[#1B1A17]/15 py-6 my-8 divide-x divide-[#1B1A17]/15">
               <div className="pr-4 text-left">
-                <span className="block text-[10px] sm:text-[11px] font-sans uppercase tracking-[0.2em] text-[#6F6A5E] mb-1">
+                <span className="block text-[11px] sm:text-[12px] font-sans uppercase tracking-[0.22em] text-[#6F6A5E] mb-1">
                   Bedrooms
                 </span>
-                <span className="font-serif text-[clamp(1.2rem,2.2vw,1.75rem)] font-light text-[#1B1A17]">
+                <span className="font-serif text-[clamp(1.3rem,2.4vw,2rem)] font-light text-[#1B1A17]">
                   05 Suites
                 </span>
               </div>
               <div className="px-4 text-left">
-                <span className="block text-[10px] sm:text-[11px] font-sans uppercase tracking-[0.2em] text-[#6F6A5E] mb-1">
+                <span className="block text-[11px] sm:text-[12px] font-sans uppercase tracking-[0.22em] text-[#6F6A5E] mb-1">
                   Primary Area
                 </span>
-                <span className="font-serif text-[clamp(1.2rem,2.2vw,1.75rem)] font-light text-[#1B1A17]">
+                <span className="font-serif text-[clamp(1.3rem,2.4vw,2rem)] font-light text-[#1B1A17]">
                   12,400 sq ft
                 </span>
               </div>
               <div className="pl-4 text-left">
-                <span className="block text-[10px] sm:text-[11px] font-sans uppercase tracking-[0.2em] text-[#6F6A5E] mb-1">
+                <span className="block text-[11px] sm:text-[12px] font-sans uppercase tracking-[0.22em] text-[#6F6A5E] mb-1">
                   Possession
                 </span>
-                <span className="font-serif text-[clamp(1.2rem,2.2vw,1.75rem)] font-light text-[#1B1A17]">
+                <span className="font-serif text-[clamp(1.3rem,2.4vw,2rem)] font-light text-[#1B1A17]">
                   Winter 2027
                 </span>
               </div>
@@ -221,15 +221,15 @@ export default function FeaturedResidence() {
           {/* Left Column: Details */}
           <div className="residence-details lg:col-span-6 lg:col-start-1 order-2 lg:order-1 space-y-8">
             <div>
-              <span className="text-[11px] font-sans uppercase tracking-[0.25em] text-[#B8956A] font-semibold block mb-3">
+              <span className="text-[12px] sm:text-[13px] font-sans uppercase tracking-[0.28em] text-[#B8956A] font-semibold block mb-3">
                 02 — BOTANICAL CLOISTERED VILLAS
               </span>
-              <h3 className="font-serif font-light text-[clamp(3rem,6vw,5.5rem)] leading-[0.96] tracking-[-0.02em] text-[#1B1A17]">
+              <h3 className="font-serif font-light text-[clamp(3.2rem,6.5vw,5.8rem)] leading-[0.96] tracking-[-0.02em] text-[#1B1A17]">
                 Aurelia Verde
               </h3>
             </div>
 
-            <p className="font-serif text-[1.125rem] sm:text-[1.25rem] text-[#6F6A5E] leading-relaxed max-w-xl">
+            <p className="font-serif text-[clamp(1.2rem,1.7vw,1.55rem)] text-[#2C2A26] font-light leading-relaxed max-w-xl">
               Cascading private villas nestled in tiered limestone cloisters. Open botanical
               terraces, shaded teak loggias, and reflecting pools open to meet coastal breezes
               and sunset horizons.
@@ -237,26 +237,26 @@ export default function FeaturedResidence() {
 
             <div className="grid grid-cols-3 border-y border-[#1B1A17]/15 py-6 my-8 divide-x divide-[#1B1A17]/15">
               <div className="pr-4 text-left">
-                <span className="block text-[10px] sm:text-[11px] font-sans uppercase tracking-[0.2em] text-[#6F6A5E] mb-1">
+                <span className="block text-[11px] sm:text-[12px] font-sans uppercase tracking-[0.22em] text-[#6F6A5E] mb-1">
                   Bedrooms
                 </span>
-                <span className="font-serif text-[clamp(1.2rem,2.2vw,1.75rem)] font-light text-[#1B1A17]">
+                <span className="font-serif text-[clamp(1.3rem,2.4vw,2rem)] font-light text-[#1B1A17]">
                   04 Suites
                 </span>
               </div>
               <div className="px-4 text-left">
-                <span className="block text-[10px] sm:text-[11px] font-sans uppercase tracking-[0.2em] text-[#6F6A5E] mb-1">
+                <span className="block text-[11px] sm:text-[12px] font-sans uppercase tracking-[0.22em] text-[#6F6A5E] mb-1">
                   Primary Area
                 </span>
-                <span className="font-serif text-[clamp(1.2rem,2.2vw,1.75rem)] font-light text-[#1B1A17]">
+                <span className="font-serif text-[clamp(1.3rem,2.4vw,2rem)] font-light text-[#1B1A17]">
                   8,600 sq ft
                 </span>
               </div>
               <div className="pl-4 text-left">
-                <span className="block text-[10px] sm:text-[11px] font-sans uppercase tracking-[0.2em] text-[#6F6A5E] mb-1">
+                <span className="block text-[11px] sm:text-[12px] font-sans uppercase tracking-[0.22em] text-[#6F6A5E] mb-1">
                   Possession
                 </span>
-                <span className="font-serif text-[clamp(1.2rem,2.2vw,1.75rem)] font-light text-[#1B1A17]">
+                <span className="font-serif text-[clamp(1.3rem,2.4vw,2rem)] font-light text-[#1B1A17]">
                   Spring 2027
                 </span>
               </div>
