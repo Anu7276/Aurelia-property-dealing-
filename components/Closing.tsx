@@ -125,10 +125,50 @@ export default function Closing() {
         <div>
           <button
             onClick={() => setIsModalOpen(true)}
-            className="group relative inline-flex items-center justify-center px-12 sm:px-16 py-4 text-[12px] font-sans font-medium uppercase tracking-[0.25em] text-[#F5F1E8] border border-[#B8956A] overflow-hidden transition-all duration-[400ms] ease-out hover:border-[#F5F1E8] hover:bg-[#F5F1E8] hover:text-[#1B1A17] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B8956A]"
+            className="group relative inline-flex items-center justify-center px-12 sm:px-16 py-4 text-[12px] font-sans font-medium uppercase tracking-[0.25em] text-[#F5F1E8] border border-[#B8956A] overflow-hidden transition-all duration-[400ms] ease-out hover:border-[#F5F1E8] hover:bg-[#F5F1E8] hover:text-[#1B1A17] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B8956A] cursor-pointer"
           >
             <span className="relative z-10">Enquire</span>
           </button>
+        </div>
+
+        {/* Mobile Direct Action Pills (Matching Call & WhatsApp reference) */}
+        <div className="mt-8 flex items-center justify-center gap-3 w-full max-w-[320px] sm:max-w-[360px]">
+          <a
+            href="tel:+13105550198"
+            className="flex-1 inline-flex items-center justify-center space-x-2 py-3 px-5 rounded-full bg-[#0D1519]/90 border border-white/20 text-white text-[13px] font-sans font-medium hover:bg-[#16232A] transition-all duration-300 shadow-lg active:scale-95"
+            aria-label="Direct Phone Call"
+          >
+            <svg
+              className="w-4 h-4 text-white"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+              />
+            </svg>
+            <span>Call</span>
+          </a>
+
+          <a
+            href="https://wa.me/13105550198?text=Hello%2C%20I%20would%20like%20to%20enquire%20about%20Aurelia%20Estates%20private%20viewing."
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex-1 inline-flex items-center justify-center space-x-2 py-3 px-5 rounded-full bg-[#0D1519]/90 border border-white/20 text-white text-[13px] font-sans font-medium hover:bg-[#16232A] transition-all duration-300 shadow-lg active:scale-95"
+            aria-label="Direct WhatsApp Message"
+          >
+            <svg
+              className="w-4 h-4 text-[#25D366] fill-current"
+              viewBox="0 0 24 24"
+            >
+              <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86.173.086.275.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.145.39-.086s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.099.824zm-3.394-10.416c-5.522 0-10 4.477-10 10 0 1.777.468 3.515 1.357 5.042l-1.394 5.198 5.337-1.399c1.474.808 3.136 1.239 4.832 1.239 5.523 0 10-4.477 10-10s-4.477-10-10-10z" />
+            </svg>
+            <span>WhatsApp</span>
+          </a>
         </div>
 
         <p className="mt-8 text-[11px] font-sans uppercase tracking-[0.2em] text-white/50">
