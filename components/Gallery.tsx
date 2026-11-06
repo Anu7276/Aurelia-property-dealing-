@@ -137,10 +137,10 @@ export default function Gallery() {
       {/* Pinned horizontal wrapper on desktop; normal clean vertical flow on mobile */}
       <div
         ref={pinWrapRef}
-        className="w-full h-auto md:h-screen md:overflow-hidden flex flex-col justify-between py-16 sm:py-20 md:pt-[12vh] md:pb-[10vh]"
+        className="w-full h-auto md:h-screen md:overflow-hidden flex flex-col justify-between py-16 sm:py-20 md:pt-[10vh] md:pb-[8vh]"
       >
         {/* Header Strip with responsive padding */}
-        <div className="px-5 sm:px-8 md:px-[6vw] flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8 sm:mb-12">
+        <div className="px-5 sm:px-8 md:px-[6vw] flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6 sm:mb-8">
           <div>
             <div className="flex items-center space-x-3 mb-2">
               <span className="w-6 h-[1.5px] bg-[#B8956A]" />
@@ -183,12 +183,12 @@ export default function Gallery() {
                     : "md:w-[28vw] md:max-w-[420px]"
                 }`}
               >
-                {/* Image Container with robust aspect ratio on mobile & fixed 62vh on desktop */}
+                {/* Image Container with robust aspect ratio on mobile & comfortable 54vh on desktop */}
                 <div
                   className={`relative w-full overflow-hidden rounded-[2px] bg-[#24231F] shadow-xl group ${
                     isWide
-                      ? "aspect-[16/10] sm:aspect-[16/9] md:aspect-auto md:h-[62vh]"
-                      : "aspect-[4/5] sm:aspect-[3/4] md:aspect-auto md:h-[62vh]"
+                      ? "aspect-[16/10] sm:aspect-[16/9] md:aspect-auto md:h-[54vh]"
+                      : "aspect-[4/5] sm:aspect-[3/4] md:aspect-auto md:h-[54vh]"
                   }`}
                 >
                   <PictureImage
@@ -225,8 +225,8 @@ export default function Gallery() {
           })}
         </div>
 
-        {/* Bottom space ensuring breathing room before next section */}
-        <div className="hidden md:block h-2" />
+        {/* Generous bottom spacing ensuring clean breathing room before closing section */}
+        <div className="w-full h-12 sm:h-16 md:h-20 pointer-events-none" />
       </div>
     </section>
   );

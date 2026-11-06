@@ -34,12 +34,10 @@ export default function PictureImage({
         alt={alt}
         loading={loading}
         decoding="async"
-        className={`w-full h-full object-cover block will-change-transform transition-all duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover/pic:scale-[1.05] ${
+        className={`w-full h-full object-cover block will-change-transform brightness-[1.02] contrast-[1.03] transition-all duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover/pic:scale-[1.05] ${
           cinematic ? "animate-cinematic-drift" : ""
         } ${imgClassName}`}
       />
-      {/* Subtle cinematic vignette layer */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-black/10 pointer-events-none transition-opacity duration-700 group-hover/pic:opacity-0" />
     </picture>
   );
 }

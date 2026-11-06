@@ -14,8 +14,6 @@ export default function Hero() {
   const step1Ref = useRef<HTMLDivElement>(null);
   const step2Ref = useRef<HTMLDivElement>(null);
   const step3Ref = useRef<HTMLDivElement>(null);
-  const scrollIndicatorRef = useRef<HTMLDivElement>(null);
-  const bottomBadgeRef = useRef<HTMLDivElement>(null);
 
   const [framesLoaded, setFramesLoaded] = useState(false);
   const imagesRef = useRef<HTMLImageElement[]>([]);
@@ -59,6 +57,8 @@ export default function Hero() {
 
       ctx.save();
       ctx.scale(dpr, dpr);
+      ctx.imageSmoothingEnabled = true;
+      ctx.imageSmoothingQuality = "high";
 
       const cw = rect.width;
       const ch = rect.height;
@@ -101,8 +101,6 @@ export default function Hero() {
     const step1 = step1Ref.current;
     const step2 = step2Ref.current;
     const step3 = step3Ref.current;
-    const scrollIndicator = scrollIndicatorRef.current;
-    const bottomBadge = bottomBadgeRef.current;
 
     if (!container || !pinSection || !step1 || !step2 || !step3) {
       return () => {
@@ -158,31 +156,6 @@ export default function Hero() {
         },
         0.04
       );
-
-      if (scrollIndicator) {
-        tlScroll.to(
-          scrollIndicator,
-          {
-            opacity: 0,
-            y: -20,
-            duration: 0.15,
-            ease: "power2.inOut",
-          },
-          0.02
-        );
-      }
-
-      if (bottomBadge) {
-        tlScroll.to(
-          bottomBadge,
-          {
-            opacity: 0,
-            duration: 0.15,
-            ease: "power2.inOut",
-          },
-          0.02
-        );
-      }
 
       // C) Step 2: Philosophy side content enters (0.22), holds, then fades out (0.55)
       tlScroll.fromTo(
@@ -273,9 +246,9 @@ export default function Hero() {
           </video>
         )}
 
-        {/* Cinematic gradient scrims to ensure high contrast for side content */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/45 to-transparent pointer-events-none z-10" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/30 pointer-events-none z-10" />
+        {/* Crisp, clear cinematic lighting scrim: transparent and bright so the architecture remains crystal clear */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/15 pointer-events-none z-10" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-transparent pointer-events-none z-10" />
 
         {/* ======================================================== */}
         {/* STEP 1: INITIAL HERO HEADLINE (From Screenshot)           */}
@@ -371,25 +344,6 @@ export default function Hero() {
               <span>REFLECTING POOLS</span>
             </div>
           </div>
-        </div>
-
-        {/* Scroll Indicator */}
-        <div
-          ref={scrollIndicatorRef}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center pointer-events-none"
-        >
-          <span className="text-[11px] font-sans uppercase tracking-[0.28em] text-white/80 mb-2 font-medium">
-            SCROLL
-          </span>
-          <div className="w-[1px] h-7 bg-white/70" />
-        </div>
-
-        {/* Circular N Badge (Matching reference screenshot) */}
-        <div
-          ref={bottomBadgeRef}
-          className="absolute bottom-8 left-[6vw] z-20 flex items-center justify-center w-7 h-7 rounded-full bg-black/85 border border-white/20 text-white text-[11px] font-sans font-bold shadow-lg pointer-events-none"
-        >
-          N
         </div>
       </div>
     </section>
