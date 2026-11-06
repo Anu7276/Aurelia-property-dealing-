@@ -4,20 +4,22 @@ import React, { useEffect, useRef } from "react";
 import PictureImage from "./PictureImage";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 
-interface PillarData {
+interface CraftBlock {
   index: string;
   word: string;
   tag: string;
+  subtitle?: string;
   description: string;
   imageSrc: string;
   imageAlt: string;
   layout: "architecture" | "living" | "light";
 }
 
-const pillarsData: PillarData[] = [
+const craftBlocks: CraftBlock[] = [
   {
     index: "01",
     word: "Architecture",
+    subtitle: "A film in...",
     tag: "MONUMENTAL FORM & TIMELESS PROPORTION",
     description:
       "Sculpted stone and restrained geometries elevate structural mass into quiet, permanent contemplation across the landscape.",
@@ -27,7 +29,7 @@ const pillarsData: PillarData[] = [
   },
   {
     index: "02",
-    word: "Living",
+    word: "Material & Living",
     tag: "THE ART OF INTENTIONAL REPOSE",
     description:
       "Sanctuaries of effortless calm where cloistered terraces open toward sunken water basins and endless sky.",
@@ -49,6 +51,7 @@ const pillarsData: PillarData[] = [
 
 export default function Pillars() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const concludingTextRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia(
@@ -56,16 +59,17 @@ export default function Pillars() {
     ).matches;
 
     const container = containerRef.current;
+    const concludingText = concludingTextRef.current;
     if (!container || prefersReducedMotion) return;
 
     const ctx = gsap.context(() => {
-      const sections = container.querySelectorAll<HTMLElement>(".pillar-section");
+      const sections = container.querySelectorAll<HTMLElement>(".craft-section");
 
       sections.forEach((section) => {
-        const imageReveal = section.querySelector<HTMLElement>(".pillar-image-reveal");
+        const imageReveal = section.querySelector<HTMLElement>(".craft-image-reveal");
         const img = section.querySelector<HTMLElement>("img");
-        const parallaxTarget = section.querySelector<HTMLElement>(".pillar-parallax");
-        const textBlock = section.querySelector<HTMLElement>(".pillar-text");
+        const parallaxTarget = section.querySelector<HTMLElement>(".craft-parallax");
+        const textBlock = section.querySelector<HTMLElement>(".craft-text");
 
         // 1. Clip path reveal
         if (imageReveal && img) {
@@ -137,6 +141,26 @@ export default function Pillars() {
           );
         }
       });
+
+      // Concluding statement "Built for today." (Reference Video Frame 13)
+      if (concludingText) {
+        gsap.fromTo(
+          concludingText.children,
+          { opacity: 0, y: 40 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 1.2,
+            stagger: 0.16,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: concludingText,
+              start: "top 75%",
+              once: true,
+            },
+          }
+        );
+      }
     }, container);
 
     return () => {
@@ -145,8 +169,8 @@ export default function Pillars() {
   }, []);
 
   return (
-    <div ref={containerRef} className="relative z-20 w-full bg-[#F5F1E8]">
-      {pillarsData.map((pillar, idx) => {
+    <div id="craft" ref={containerRef} className="relative z-20 w-full bg-[#F5F1E8]">
+      {craftBlocks.map((pillar, idx) => {
         const isArch = pillar.layout === "architecture";
         const isLiving = pillar.layout === "living";
         const isLight = pillar.layout === "light";
@@ -154,32 +178,40 @@ export default function Pillars() {
         return (
           <section
             key={pillar.index}
-            className="pillar-section relative min-h-screen w-full flex flex-col justify-center px-[6vw] py-20 lg:py-28 overflow-hidden bg-[#F5F1E8] text-[#1B1A17]"
+            className="craft-section relative min-h-screen w-full flex flex-col justify-center px-[6vw] py-20 lg:py-28 overflow-hidden bg-[#F5F1E8] text-[#1B1A17]"
           >
-            {/* Top Index and Hairline */}
+            {/* Top Index and Hairline matching Video Reference */}
             <div className="w-full max-w-[1920px] mx-auto flex items-center justify-between pb-6 mb-8 lg:mb-12 border-b border-[#1B1A17]/10">
-              <span className="text-[12px] font-sans uppercase tracking-[0.25em] text-[#B8956A] font-semibold">
-                {pillar.index} / 03
-              </span>
+              <div className="flex items-center space-x-3">
+                <span className="text-[12px] font-sans uppercase tracking-[0.25em] text-[#B8956A] font-semibold">
+                  {pillar.index} / 03
+                </span>
+                {pillar.subtitle && (
+                  <>
+                    <span className="w-4 h-[1px] bg-[#1B1A17]/20" />
+                    <span className="font-serif italic text-sm text-[#6F6A5E]">
+                      {pillar.subtitle}
+                    </span>
+                  </>
+                )}
+              </div>
               <span className="text-[11px] font-sans uppercase tracking-[0.22em] text-[#6F6A5E]">
                 {pillar.tag}
               </span>
             </div>
 
-            {/* Main Content Grid: 12 Columns so elements never collide */}
+            {/* Main Content Grid: 12 Columns */}
             <div className="w-full max-w-[1920px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center relative">
               {/* Architecture: Word left, Image right, Text left */}
               {isArch && (
                 <>
-                  {/* Giant Word: positioned above in z-index, overlapping only ~15% on large screens */}
                   <div className="lg:col-span-12 z-20 relative select-none pointer-events-none mb-[-2vw] lg:mb-[-4vw]">
                     <h3 className="font-serif font-light text-[clamp(4.5rem,15vw,18rem)] leading-[0.85] tracking-[-0.03em] text-[#1B1A17]">
                       {pillar.word}
                     </h3>
                   </div>
 
-                  {/* Text Column with 3rem gap from image */}
-                  <div className="pillar-text lg:col-span-5 lg:col-start-1 z-20 space-y-4">
+                  <div className="craft-text lg:col-span-5 lg:col-start-1 z-20 space-y-4">
                     <span className="text-[11px] font-sans uppercase tracking-[0.25em] text-[#B8956A] font-semibold block">
                       STRUCTURE &amp; MONOLITH
                     </span>
@@ -188,10 +220,9 @@ export default function Pillars() {
                     </p>
                   </div>
 
-                  {/* Image Column */}
                   <div className="lg:col-span-5 lg:col-start-8 z-10">
-                    <div className="pillar-parallax will-change-transform flex justify-end">
-                      <div className="pillar-image-reveal overflow-hidden rounded-[2px] bg-[#EFE9DB] shadow-sm w-full max-w-[clamp(260px,28vw,460px)] max-h-[80vh] aspect-[3/4]">
+                    <div className="craft-parallax will-change-transform flex justify-end">
+                      <div className="craft-image-reveal overflow-hidden rounded-[2px] bg-[#EFE9DB] shadow-sm w-full max-w-[clamp(260px,28vw,460px)] max-h-[80vh] aspect-[3/4]">
                         <PictureImage
                           src={pillar.imageSrc}
                           alt={pillar.imageAlt}
@@ -207,17 +238,15 @@ export default function Pillars() {
               {/* Living: Image left, Word right, Text right */}
               {isLiving && (
                 <>
-                  {/* Giant Word Right */}
                   <div className="lg:col-span-12 z-20 relative select-none pointer-events-none mb-[-2vw] lg:mb-[-4vw] lg:text-right">
                     <h3 className="font-serif font-light text-[clamp(4.5rem,15vw,18rem)] leading-[0.85] tracking-[-0.03em] text-[#1B1A17]">
                       {pillar.word}
                     </h3>
                   </div>
 
-                  {/* Image Column Left */}
                   <div className="lg:col-span-5 lg:col-start-1 z-10 order-2 lg:order-1">
-                    <div className="pillar-parallax will-change-transform flex justify-start">
-                      <div className="pillar-image-reveal overflow-hidden rounded-[2px] bg-[#EFE9DB] shadow-sm w-full max-w-[clamp(260px,28vw,460px)] max-h-[80vh] aspect-[3/4]">
+                    <div className="craft-parallax will-change-transform flex justify-start">
+                      <div className="craft-image-reveal overflow-hidden rounded-[2px] bg-[#EFE9DB] shadow-sm w-full max-w-[clamp(260px,28vw,460px)] max-h-[80vh] aspect-[3/4]">
                         <PictureImage
                           src={pillar.imageSrc}
                           alt={pillar.imageAlt}
@@ -228,8 +257,7 @@ export default function Pillars() {
                     </div>
                   </div>
 
-                  {/* Text Column Right with 3rem gap */}
-                  <div className="pillar-text lg:col-span-5 lg:col-start-8 z-20 space-y-4 order-1 lg:order-2">
+                  <div className="craft-text lg:col-span-5 lg:col-start-8 z-20 space-y-4 order-1 lg:order-2">
                     <span className="text-[11px] font-sans uppercase tracking-[0.25em] text-[#B8956A] font-semibold block">
                       SANCTUARY &amp; REPOSE
                     </span>
@@ -243,15 +271,13 @@ export default function Pillars() {
               {/* Light: Word left, Image center-right, Text left */}
               {isLight && (
                 <>
-                  {/* Giant Word Left */}
                   <div className="lg:col-span-12 z-20 relative select-none pointer-events-none mb-[-2vw] lg:mb-[-4vw]">
                     <h3 className="font-serif font-light text-[clamp(4.5rem,15vw,18rem)] leading-[0.85] tracking-[-0.03em] text-[#1B1A17]">
                       {pillar.word}
                     </h3>
                   </div>
 
-                  {/* Text Column Left with 3rem gap */}
-                  <div className="pillar-text lg:col-span-5 lg:col-start-1 z-20 space-y-4">
+                  <div className="craft-text lg:col-span-5 lg:col-start-1 z-20 space-y-4">
                     <span className="text-[11px] font-sans uppercase tracking-[0.25em] text-[#B8956A] font-semibold block">
                       SOLAR GEOMETRY
                     </span>
@@ -260,10 +286,9 @@ export default function Pillars() {
                     </p>
                   </div>
 
-                  {/* Image Column Center-Right */}
                   <div className="lg:col-span-5 lg:col-start-7 z-10">
-                    <div className="pillar-parallax will-change-transform flex justify-start lg:justify-center">
-                      <div className="pillar-image-reveal overflow-hidden rounded-[2px] bg-[#EFE9DB] shadow-sm w-full max-w-[clamp(260px,28vw,460px)] max-h-[80vh] aspect-[3/4]">
+                    <div className="craft-parallax will-change-transform flex justify-start lg:justify-center">
+                      <div className="craft-image-reveal overflow-hidden rounded-[2px] bg-[#EFE9DB] shadow-sm w-full max-w-[clamp(260px,28vw,460px)] max-h-[80vh] aspect-[3/4]">
                         <PictureImage
                           src={pillar.imageSrc}
                           alt={pillar.imageAlt}
@@ -277,13 +302,37 @@ export default function Pillars() {
               )}
             </div>
 
-            {/* Hairline separator if not last */}
-            {idx < pillarsData.length - 1 && (
+            {idx < craftBlocks.length - 1 && (
               <div className="w-full max-w-[1920px] mx-auto mt-20 pt-8 border-b border-[#1B1A17]/10" />
             )}
           </section>
         );
       })}
+
+      {/* "Built for today." (Reference Video Frame 13) */}
+      <section className="relative w-full py-28 lg:py-40 px-[6vw] bg-[#F5F1E8] border-t border-[#1B1A17]/10 flex flex-col justify-center">
+        <div ref={concludingTextRef} className="w-full max-w-[1920px] mx-auto">
+          <div className="flex items-center space-x-3 mb-6">
+            <span className="text-[11px] font-sans uppercase tracking-[0.25em] text-[#B8956A] font-semibold">
+              03 / PHILOSOPHY OF PERMANENCE
+            </span>
+          </div>
+
+          <h3 className="font-serif font-light text-[clamp(3.8rem,11vw,11rem)] leading-[0.9] tracking-[-0.03em] text-[#1B1A17] mb-8">
+            Built <span className="italic">for today.</span>
+          </h3>
+
+          <p className="font-serif text-[1.25rem] sm:text-[1.5rem] text-[#6F6A5E] max-w-2xl leading-relaxed">
+            Every proportion calibrated to withstand time. Material integrity, natural ventilation,
+            and permanent geometries conceived as living architecture.
+          </p>
+
+          <div className="mt-16 pt-8 border-t border-[#1B1A17]/10 flex items-center justify-between text-[11px] font-sans uppercase tracking-[0.22em] text-[#6F6A5E]">
+            <span>AURELIA CRAFT MONOGRAPH</span>
+            <span className="text-[#B8956A]">03 / COMPLETED ARCHIVE</span>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

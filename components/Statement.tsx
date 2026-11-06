@@ -69,12 +69,21 @@ export default function Statement() {
 
   return (
     <section
+      id="philosophy"
       ref={sectionRef}
       className="relative z-20 w-full min-h-screen bg-[#F5F1E8] flex flex-col justify-center pt-[20vh] pb-[15vh] px-[6vw] text-[#1B1A17] overflow-hidden"
     >
-      <div className="max-w-[1920px] mx-auto w-full grid grid-cols-1 md:grid-cols-12 gap-y-12">
-        {/* Caption row aligned to 12-col grid */}
+      {/* Subtle giant architectural ghost watermark */}
+      <div className="absolute right-[4vw] top-1/2 -translate-y-1/2 pointer-events-none select-none font-serif font-light text-[clamp(14rem,32vw,36rem)] text-[#1B1A17]/[0.03] leading-none -z-10">
+        01
+      </div>
+
+      <div className="max-w-[1920px] mx-auto w-full grid grid-cols-1 md:grid-cols-12 gap-y-12 relative">
+        {/* Caption row with reference indexing */}
         <div ref={captionRef} className="md:col-span-12 flex items-center space-x-4 mb-4">
+          <span className="text-[12px] font-sans font-semibold text-[#B8956A] tracking-[0.25em]">
+            (01)
+          </span>
           <div className="w-8 h-[1px] bg-[#B8956A]" />
           <span className="text-[11px] sm:text-[12px] font-sans uppercase tracking-[0.25em] text-[#6F6A5E] font-medium">
             AURELIA ESTATES
@@ -85,7 +94,7 @@ export default function Statement() {
         <div className="md:col-span-11 lg:col-span-10">
           <h2
             ref={textRef}
-            className="font-serif font-light text-[clamp(2rem,5vw,5.5rem)] leading-[1.08] tracking-[-0.015em] text-[#1B1A17]"
+            className="font-serif font-light text-[clamp(2.2rem,5.2vw,5.5rem)] leading-[1.08] tracking-[-0.015em] text-[#1B1A17]"
           >
             {words.map((word, i) => (
               <span
@@ -98,13 +107,14 @@ export default function Statement() {
           </h2>
         </div>
 
-        {/* Two small labels below, aligned to 12-column grid */}
-        <div className="md:col-span-12 mt-12 sm:mt-20 pt-8 border-t border-[#1B1A17]/10 grid grid-cols-1 md:grid-cols-12 gap-6 text-[#6F6A5E] text-[11px] font-sans tracking-[0.22em] uppercase font-medium">
-          <div className="md:col-span-6 flex items-center space-x-3">
-            <span className="text-[#B8956A]">01</span>
-            <span>PHILOSOPHY OF ARCHITECTURAL SCALE</span>
+        {/* Bottom hairline coordinates matching reference */}
+        <div className="md:col-span-12 mt-12 sm:mt-20 pt-8 border-t border-[#1B1A17]/10 flex flex-col sm:flex-row items-start sm:items-center justify-between text-[#6F6A5E] text-[11px] font-sans tracking-[0.22em] uppercase font-medium gap-4">
+          <div className="flex items-center space-x-3">
+            <span>AURELIA</span>
+            <span className="w-6 h-[1px] bg-[#1B1A17]/20" />
+            <span className="text-[#B8956A]">01 / PHILOSOPHY</span>
           </div>
-          <div className="md:col-span-6 md:text-right">
+          <div>
             <span>SCULPTED MONOLITHS &amp; PURE SOLAR DIALOGUE</span>
           </div>
         </div>

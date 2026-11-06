@@ -46,7 +46,7 @@ export default function Hero() {
         },
       });
 
-      // 1. Text fades up and out during the first 30% of scroll (duration: 0.3 on scale 0-1)
+      // 1. Headline and bottom tag fade up and out during initial 30% of scroll
       tlScroll.to(
         text,
         {
@@ -70,24 +70,25 @@ export default function Hero() {
         0
       );
 
-      // 2. Video wrapper shrinks to centered card ~60vw wide, 4px radius, subtle tilt
-      // Reaches target card by 0.75 and holds until 1.0 before scrolling away
+      // 2. Video wrapper shrinks smoothly to centered perspective card
+      // Desktop: 60vw wide, ~64vh high, rotateY -6deg, rotateX 3deg, rounded 4px
+      // Mobile: 90vw wide, 54vh high, 0deg tilt, rounded 4px
       tlScroll.to(
         videoWrapper,
         {
-          width: isMobile ? "92vw" : "60vw",
-          height: isMobile ? "54vh" : "66vh",
+          width: isMobile ? "90vw" : "60vw",
+          height: isMobile ? "54vh" : "64vh",
           borderRadius: "4px",
           rotateY: isMobile ? 0 : -6,
           rotateX: isMobile ? 0 : 3,
-          boxShadow: "0 25px 60px -15px rgba(27, 26, 23, 0.25)",
+          boxShadow: "0 30px 70px -15px rgba(27, 26, 23, 0.3)",
           duration: 0.75,
           ease: "power2.inOut",
         },
         0.05
       );
 
-      // 3. Background shifts cleanly to luxury CREAM #F5F1E8
+      // 3. Section background shifts seamlessly to warm architectural cream
       tlScroll.to(
         bg,
         {
@@ -130,7 +131,7 @@ export default function Hero() {
           className="relative w-screen h-screen overflow-hidden transform-gpu will-change-transform flex items-center justify-center"
           style={{ transformStyle: "preserve-3d" }}
         >
-          {/* Full bleed hero loop video */}
+          {/* Hero Video Loop */}
           <video
             className="absolute inset-0 w-full h-full object-cover scale-105 pointer-events-none"
             autoPlay
@@ -143,26 +144,32 @@ export default function Hero() {
             <source src="/assets/video/hero-loop.mp4" type="video/mp4" />
           </video>
 
-          {/* Subtle bottom-up dark gradient behind text for contrast */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent pointer-events-none" />
+          {/* Dark gradient overlay for pristine contrast */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/30 to-transparent pointer-events-none" />
         </div>
 
-        {/* Hero Overlay Text: Fully opaque from frame 1, left-aligned at bottom-left with 6vw padding */}
+        {/* Hero Overlay Text: Opaque from frame 1, bottom-left aligned with 6vw padding */}
         <div
           ref={textRef}
-          className="absolute inset-0 z-10 flex flex-col justify-end pb-[8vh] sm:pb-[10vh] md:pb-[12vh] px-[6vw] pointer-events-none opacity-100"
+          className="absolute inset-0 z-10 flex flex-col justify-end pb-[8vh] sm:pb-[10vh] md:pb-[12vh] px-[6vw] pointer-events-none"
         >
           <div className="max-w-6xl">
-            <h1 className="font-serif text-white font-light text-[clamp(3rem,8vw,9rem)] leading-[0.95] tracking-[-0.02em] select-none text-left">
+            <h1 className="font-serif text-white font-light text-[clamp(3rem,8vw,9rem)] leading-[0.95] tracking-[-0.02em] select-none text-left mb-6">
               <span className="block">Where architecture</span>
               <span className="block italic font-light text-white/95">
                 meets possibility.
               </span>
             </h1>
+
+            {/* Subtitle tag matching reference video */}
+            <div className="flex items-center space-x-3 text-[11px] font-sans uppercase tracking-[0.25em] text-white/70">
+              <span className="w-5 h-[1px] bg-[#B8956A]" />
+              <span>AURELIA ESTATES</span>
+            </div>
           </div>
         </div>
 
-        {/* Small Scroll Indicator */}
+        {/* Scroll Indicator */}
         <div
           ref={scrollIndicatorRef}
           className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center pointer-events-none"
