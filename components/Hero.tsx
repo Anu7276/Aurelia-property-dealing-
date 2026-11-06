@@ -273,75 +273,91 @@ export default function Hero() {
         </div>
 
         {/* ======================================================== */}
-        {/* STEP 2: PHILOSOPHY CONTENT SCROLLING ON THE SIDE         */}
+        {/* STEP 2: BORDERLESS ARCHITECTURAL CINEMA OVERLAY           */}
         {/* ======================================================== */}
         <div
           ref={step2Ref}
-          className="absolute inset-y-0 left-0 w-full md:w-[56vw] lg:w-[46vw] max-w-2xl px-5 sm:px-8 md:px-[6vw] flex flex-col justify-center pointer-events-none z-20 opacity-0"
+          className="absolute inset-y-0 left-0 w-full md:w-[65vw] lg:w-[55vw] max-w-3xl px-5 sm:px-8 md:px-[6vw] flex flex-col justify-center pointer-events-none z-20 opacity-0"
         >
-          <div className="p-6 sm:p-10 rounded-[2px] bg-black/50 backdrop-blur-md border border-white/10 shadow-2xl text-left space-y-4 sm:space-y-5">
-            <div className="flex items-center space-x-3">
-              <span className="text-[12px] font-sans font-semibold text-[#B8956A] tracking-[0.25em]">
-                01
+          <div className="text-left space-y-5 sm:space-y-7 drop-shadow-[0_4px_24px_rgba(0,0,0,0.7)]">
+            <div className="flex items-center space-x-3 sm:space-x-4">
+              <span className="font-serif italic text-[15px] sm:text-[17px] text-[#B8956A]">
+                Chapter 01
               </span>
-              <div className="w-6 h-[1px] bg-[#B8956A]" />
-              <span className="text-[10px] sm:text-[11px] font-sans uppercase tracking-[0.25em] text-white/70 font-medium">
-                PHILOSOPHY OF SANCTUARY
+              <div className="w-8 sm:w-12 h-[1px] bg-[#B8956A]/80" />
+              <span className="text-[10px] sm:text-[11px] font-sans uppercase tracking-[0.28em] text-white/80 font-medium">
+                THE PHILOSOPHY OF SANCTUARY
               </span>
             </div>
 
-            <h2 className="font-serif font-light text-[clamp(1.6rem,3.2vw,3.2rem)] leading-[1.1] tracking-[-0.015em] text-white/95">
-              We don&apos;t just build spaces. We shape how life is lived.
+            <h2 className="font-serif font-light text-[clamp(2.1rem,4.5vw,4.5rem)] leading-[1.04] tracking-[-0.02em] text-white">
+              We don&apos;t just build spaces. <br className="hidden sm:inline" />
+              <span className="italic text-white/95">We shape how life is lived.</span>
             </h2>
 
-            <p className="font-serif text-[0.95rem] sm:text-[1.1rem] text-white/80 leading-relaxed">
+            <p className="font-serif text-[clamp(1.05rem,1.4vw,1.35rem)] text-white/85 leading-[1.6] max-w-xl font-light">
               Monolithic limestone planes, sheer linen drapery, and pure solar apertures
               sculpted for unhurried quietude and seamless dialogue with coastal horizons.
             </p>
 
-            <div className="pt-4 border-t border-white/15 flex items-center justify-between text-[10px] font-sans uppercase tracking-[0.2em] text-[#B8956A]">
-              <span>12,400 SQ FT</span>
-              <span>&bull;</span>
-              <span>PACIFIC PALISADES</span>
-              <span>&bull;</span>
-              <span>WINTER 2027</span>
+            <div className="pt-6 border-t border-white/20 flex flex-wrap items-center gap-x-6 gap-y-2 text-[10px] sm:text-[11px] font-sans uppercase tracking-[0.24em] text-[#B8956A] font-medium">
+              <div className="flex items-center space-x-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#B8956A]" />
+                <span>12,400 SQ FT</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#B8956A]" />
+                <span>PACIFIC PALISADES</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#B8956A]" />
+                <span>EST. WINTER 2027</span>
+              </div>
             </div>
           </div>
         </div>
 
         {/* ======================================================== */}
-        {/* STEP 3: ARCHITECTURE & LIGHT CONTENT SCROLLING ON SIDE   */}
+        {/* STEP 3: BORDERLESS ARCHITECTURAL CINEMA OVERLAY           */}
         {/* ======================================================== */}
         <div
           ref={step3Ref}
-          className="absolute inset-y-0 left-0 w-full md:w-[56vw] lg:w-[46vw] max-w-2xl px-5 sm:px-8 md:px-[6vw] flex flex-col justify-center pointer-events-none z-20 opacity-0"
+          className="absolute inset-y-0 left-0 w-full md:w-[65vw] lg:w-[55vw] max-w-3xl px-5 sm:px-8 md:px-[6vw] flex flex-col justify-center pointer-events-none z-20 opacity-0"
         >
-          <div className="p-6 sm:p-10 rounded-[2px] bg-black/50 backdrop-blur-md border border-white/10 shadow-2xl text-left space-y-4 sm:space-y-5">
-            <div className="flex items-center space-x-3">
-              <span className="text-[12px] font-sans font-semibold text-[#B8956A] tracking-[0.25em]">
-                02
+          <div className="text-left space-y-5 sm:space-y-7 drop-shadow-[0_4px_24px_rgba(0,0,0,0.7)]">
+            <div className="flex items-center space-x-3 sm:space-x-4">
+              <span className="font-serif italic text-[15px] sm:text-[17px] text-[#B8956A]">
+                Chapter 02
               </span>
-              <div className="w-6 h-[1px] bg-[#B8956A]" />
-              <span className="text-[10px] sm:text-[11px] font-sans uppercase tracking-[0.25em] text-white/70 font-medium">
+              <div className="w-8 sm:w-12 h-[1px] bg-[#B8956A]/80" />
+              <span className="text-[10px] sm:text-[11px] font-sans uppercase tracking-[0.28em] text-white/80 font-medium">
                 THE ART OF PROPORTION
               </span>
             </div>
 
-            <h2 className="font-serif font-light text-[clamp(1.6rem,3.2vw,3.2rem)] leading-[1.1] tracking-[-0.015em] text-white/95">
-              Sculpted to capture the dialogue between horizon and earth.
+            <h2 className="font-serif font-light text-[clamp(2.1rem,4.5vw,4.5rem)] leading-[1.04] tracking-[-0.02em] text-white">
+              Sculpted to capture the dialogue <br className="hidden sm:inline" />
+              <span className="italic text-white/95">between horizon and earth.</span>
             </h2>
 
-            <p className="font-serif text-[0.95rem] sm:text-[1.1rem] text-white/80 leading-relaxed">
+            <p className="font-serif text-[clamp(1.05rem,1.4vw,1.35rem)] text-white/85 leading-[1.6] max-w-xl font-light">
               Every perspective is calibrated to daylight arcs, transforming natural stone
               and reflective waters into living art from dawn to dusk.
             </p>
 
-            <div className="pt-4 border-t border-white/15 flex items-center justify-between text-[10px] font-sans uppercase tracking-[0.2em] text-[#B8956A]">
-              <span>DISCREET SALONS</span>
-              <span>&bull;</span>
-              <span>CLOISTERED TERRACES</span>
-              <span>&bull;</span>
-              <span>REFLECTING POOLS</span>
+            <div className="pt-6 border-t border-white/20 flex flex-wrap items-center gap-x-6 gap-y-2 text-[10px] sm:text-[11px] font-sans uppercase tracking-[0.24em] text-[#B8956A] font-medium">
+              <div className="flex items-center space-x-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#B8956A]" />
+                <span>DISCREET SALONS</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#B8956A]" />
+                <span>CLOISTERED TERRACES</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#B8956A]" />
+                <span>REFLECTING POOLS</span>
+              </div>
             </div>
           </div>
         </div>
