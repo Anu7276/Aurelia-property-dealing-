@@ -3,7 +3,7 @@
 import React, { useEffect, useRef } from "react";
 import PictureImage from "./PictureImage";
 import { useSmoothScroll } from "./SmoothScroll";
-import { gsap, ScrollTrigger } from "@/lib/gsap";
+import { gsap } from "@/lib/gsap";
 
 export default function FeaturedResidence() {
   const containerRef = useRef<HTMLElement>(null);

@@ -1,16 +1,14 @@
 "use client";
 
-import React, { createContext, useContext, useEffect, useRef } from "react";
+import React, { createContext, useContext, useEffect, useRef, useCallback } from "react";
 import Lenis from "lenis";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 
 interface SmoothScrollContextType {
-  lenis: Lenis | null;
   scrollTo: (target: string | HTMLElement | number, options?: Record<string, unknown>) => void;
 }
 
 const SmoothScrollContext = createContext<SmoothScrollContextType>({
-  lenis: null,
   scrollTo: () => {},
 });
 
@@ -26,7 +24,6 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
     ).matches;
 
     if (prefersReducedMotion) {
-      // Don't initialize Lenis when reduced motion is preferred
       return;
     }
 
@@ -65,7 +62,7 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
     };
   }, []);
 
-  const scrollTo = (
+  const scrollTo = useCallback((
     target: string | HTMLElement | number,
     options?: Record<string, unknown>
   ) => {
@@ -85,12 +82,11 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
         target.scrollIntoView({ behavior: "smooth" });
       }
     }
-  };
+  }, []);
 
   return (
-    <SmoothScrollContext.Provider value={{ lenis: lenisRef.current, scrollTo }}>
+    <SmoothScrollContext.Provider value={{ scrollTo }}>
       {children}
     </SmoothScrollContext.Provider>
   );
 }
-

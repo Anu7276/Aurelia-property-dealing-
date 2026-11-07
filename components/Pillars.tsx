@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef } from "react";
 import PictureImage from "./PictureImage";
-import { gsap, ScrollTrigger } from "@/lib/gsap";
+import { gsap } from "@/lib/gsap";
 
 interface CraftBlock {
   index: string;

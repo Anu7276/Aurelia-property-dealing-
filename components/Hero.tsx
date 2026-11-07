@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import { gsap, ScrollTrigger } from "@/lib/gsap";
+import { gsap } from "@/lib/gsap";
 
 const TOTAL_FRAMES = 72;
 
@@ -29,7 +29,7 @@ export default function Hero() {
       img.src = `/assets/hero_frames/frame_${num}.webp`;
       img.onload = () => {
         count++;
-        if (count >= 10 && !framesLoaded) {
+        if (count >= 10) {
           setFramesLoaded(true);
         }
       };
